@@ -6,16 +6,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["RevitFamilyBox.FamilyManagementService/RevitFamilyBox.FamilyManagementService.csproj", "RevitFamilyBox.FamilyManagementService/"]
-RUN dotnet restore "RevitFamilyBox.FamilyManagementService/RevitFamilyBox.FamilyManagementService.csproj"
+COPY ["RevitFamilyBox.FamilyManagementService.Server/RevitFamilyBox.FamilyManagementService.Server.csproj", "RevitFamilyBox.FamilyManagementService.Server/"]
+RUN dotnet restore "RevitFamilyBox.FamilyManagementService.Server/RevitFamilyBox.FamilyManagementService.Server.csproj"
 COPY . .
-WORKDIR "/src/RevitFamilyBox.FamilyManagementService"
-RUN dotnet build "RevitFamilyBox.FamilyManagementService.csproj" -c Release -o /app/build
+WORKDIR "/src/RevitFamilyBox.FamilyManagementService.Server"
+RUN dotnet build "RRevitFamilyBox.FamilyManagementService.Server.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "RevitFamilyBox.FamilyManagementService.csproj" -c Release -o /app/publish
+RUN dotnet publish "RevitFamilyBox.FamilyManagementService.Server.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "RevitFamilyBox.FamilyManagementService.dll"]
+ENTRYPOINT ["dotnet", "RevitFamilyBox.FamilyManagementService.Server.dll"]
