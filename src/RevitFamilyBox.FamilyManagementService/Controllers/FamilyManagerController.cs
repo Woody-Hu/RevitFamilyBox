@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RevitFamilyBox.DAL.Models;
-using RevitFamilyBox.Services;
+using RevitFamilyBox.FamilyManagementService.DAL.Models;
+using RevitFamilyBox.FamilyManagementService.Services;
 
-namespace RevitFamilyBox.Controllers
+namespace RevitFamilyBox.FamilyManagementService.Controllers
 {
   [ApiController]
   [Route("[controller]")]

@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{EA20610B-CE65-49F3-86E8-B854B74E26D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitFamilyBox.FamilyManagementService", "src\RevitFamilyBox.FamilyManagementService\RevitFamilyBox.FamilyManagementService.csproj", "{5C01ACCF-4596-4F66-B540-DB89EA2500B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RevitFamilyBox.FaimilyManagementService", "RevitFamilyBox.FaimilyManagementService", "{9CF74B4D-A2F4-48FB-B6C7-695883CAB643}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C01ACCF-4596-4F66-B540-DB89EA2500B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C01ACCF-4596-4F66-B540-DB89EA2500B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C01ACCF-4596-4F66-B540-DB89EA2500B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C01ACCF-4596-4F66-B540-DB89EA2500B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B5A12FE-B19B-4D8B-BFC5-0DD7B392444E}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5C01ACCF-4596-4F66-B540-DB89EA2500B0} = {9CF74B4D-A2F4-48FB-B6C7-695883CAB643}
+		{9CF74B4D-A2F4-48FB-B6C7-695883CAB643} = {EA20610B-CE65-49F3-86E8-B854B74E26D1}
+	EndGlobalSection
+EndGlobal

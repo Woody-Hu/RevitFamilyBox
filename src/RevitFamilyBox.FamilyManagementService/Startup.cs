@@ -10,11 +10,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using RevitFamilyBox.Config;
-using RevitFamilyBox.Services;
-using RevitFamilyBox.Services.Imp;
+using RevitFamilyBox.FamilyManagementService.Config;
+using RevitFamilyBox.FamilyManagementService.Services;
+using RevitFamilyBox.FamilyManagementService.Services.Imp;
 
-namespace RevitFamilyBox
+namespace RevitFamilyBox.FamilyManagementService
 {
   public class Startup
   {

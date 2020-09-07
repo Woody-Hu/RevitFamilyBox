@@ -1,4 +1,4 @@
-﻿namespace RevitFamilyBox.Config
+﻿namespace RevitFamilyBox.FamilyManagementService.Config
 {
   public class FamilyManagerConfig
   {
