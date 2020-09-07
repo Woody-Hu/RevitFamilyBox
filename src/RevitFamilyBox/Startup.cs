@@ -1,16 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using RevitFamilyBox.FamilyManagementService.Server.Config;
-using RevitFamilyBox.FamilyManagementService.Server.Domain;
-using RevitFamilyBox.FamilyManagementService.Server.Repository;
+using RevitFamilyBox.Config;
+using RevitFamilyBox.Services;
+using RevitFamilyBox.Services.Imp;
 
-namespace RevitFamilyBox.FamilyManagementService.Server
+namespace RevitFamilyBox
 {
-    public class Startup
+  public class Startup
   {
     public Startup(IConfiguration configuration)
     {
@@ -42,7 +48,7 @@ namespace RevitFamilyBox.FamilyManagementService.Server
         return familyMgrCfg;
       });
 
-      services.AddTransient<IFamilyInfoRepository, MongoFamilyInfoRepository>();
+      services.AddTransient<IFamilyManagerService, FamilyManagerMongoDBService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

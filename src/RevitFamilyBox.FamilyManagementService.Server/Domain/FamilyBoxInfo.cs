@@ -12,7 +12,7 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Domain
 
         public JsonDocument Parameters { get; set; }
 
-        public IEnumerable<string> ParentIds { get; set; }
+        public string ParentId { get; set; }
 
         public FamilyBoxInfo()
         {

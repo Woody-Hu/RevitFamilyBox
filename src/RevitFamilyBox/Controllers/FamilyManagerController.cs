@@ -2,23 +2,23 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RevitFamilyBox.FamilyManagementService.Server.DAL.Models;
-using RevitFamilyBox.FamilyManagementService.Server.Domain;
+using RevitFamilyBox.DAL.Models;
+using RevitFamilyBox.Services;
 
-namespace RevitFamilyBox.FamilyManagementService.Server.Controllers
+namespace RevitFamilyBox.Controllers
 {
   [ApiController]
   [Route("[controller]")]
   public class FamilyManagerController : ControllerBase
   {
-    private readonly IFamilyInfoRepository _familyManagerService;
+    private readonly IFamilyManagerService _familyManagerService;
 
     private readonly ILogger<FamilyManagerController> _logger;
 
 
     public FamilyManagerController(
-      ILogger<FamilyManagerController> logger,
-      IFamilyInfoRepository familyManagerService)
+      ILogger<FamilyManagerController> logger, 
+      IFamilyManagerService familyManagerService)
     {
       _familyManagerService = familyManagerService;
 
@@ -28,13 +28,13 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Controllers
     [HttpGet("Item")]
     public async Task<IEnumerable<FamilyInfo>> GetFamilyInfosAsync()
     {
-      return await _familyManagerService.FindFamilyInfosAsync(1, 1);
+      return await _familyManagerService.GetFamilyInfoAsync(1, 1);
     }
 
     [HttpPost("Item")]
     public async Task<IEnumerable<FamilyInfo>> AddFamilyInfosAsync(IEnumerable<FamilyInfo> familyInfos)
     {
-      return await _familyManagerService.AddFamilyInfosAsync(familyInfos);
+      return await _familyManagerService.AddFamilyInfoAsync(familyInfos);
     }
   }
 }

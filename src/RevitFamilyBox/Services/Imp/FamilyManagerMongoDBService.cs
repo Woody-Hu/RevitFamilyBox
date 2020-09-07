@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using RevitFamilyBox.FamilyManagementService.Server.Config;
-using RevitFamilyBox.FamilyManagementService.Server.DAL.Models;
+using RevitFamilyBox.Config;
+using RevitFamilyBox.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RevitFamilyBox.FamilyManagementService.Server.Services.Imp
+namespace RevitFamilyBox.Services.Imp
 {
   public class FamilyManagerMongoDBService : IFamilyManagerService
   {
