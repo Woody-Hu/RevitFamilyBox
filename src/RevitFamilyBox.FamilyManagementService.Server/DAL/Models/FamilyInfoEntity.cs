@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using System.Text.Json;
 
 namespace RevitFamilyBox.FamilyManagementService.Server.DAL.Models
 {
@@ -8,10 +9,8 @@ namespace RevitFamilyBox.FamilyManagementService.Server.DAL.Models
 
     public string Name { get; set; }
 
-    /// <summary>
-    /// parameters, as json format
-    /// </summary>
     public string Parameters { get; set; }
+
 
     public int UserId { get; set; }
 
