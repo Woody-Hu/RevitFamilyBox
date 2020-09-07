@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace RevitFamilyBox.FamilyManagementService
+namespace RevitFamilyBox.FamilyManagementService.Server
 {
   public class Program
   {

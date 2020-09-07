@@ -351,3 +351,4 @@ MigrationBackup/
 .DS_Store
 src/RevitFamilyBox.FamilyManagementService/.DS_Store
 src/RevitFamilyBox.FamilyManagementService/.DS_Store
+src/RevitFamilyBox.FamilyManagementService.Server/DAL/.DS_Store

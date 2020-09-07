@@ -1,8 +1,8 @@
-﻿using RevitFamilyBox.FamilyManagementService.DAL.Models;
+﻿using RevitFamilyBox.FamilyManagementService.Server.DAL.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RevitFamilyBox.FamilyManagementService.Services
+namespace RevitFamilyBox.FamilyManagementService.Server.Services
 {
   public interface IFamilyManagerService
   {
