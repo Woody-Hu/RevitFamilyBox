@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 
-namespace RevitFamilyBox.FamilyManagementService.Server.DAL.Models
+namespace RevitFamilyBox.FamilyManagementService.Server.Repository
 {
   public class FamilyInfoEntity
   {
