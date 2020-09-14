@@ -6,6 +6,8 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Domain
 {
     public interface IFamilyInfoRepository
     {
+        Task<FamilyInfo> FindFamilyInfoAsync(string id, int versionId);
+
         Task<IEnumerable<FamilyInfo>> AddFamilyInfosAsync(IEnumerable<FamilyInfo> familyInfos);
 
         Task<IEnumerable<FamilyInfo>> FindFamilyInfosAsync(int userId, int versionId, string xPath = null);

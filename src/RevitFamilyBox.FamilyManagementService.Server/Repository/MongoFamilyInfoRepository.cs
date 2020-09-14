@@ -6,7 +6,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using RevitFamilyBox.FamilyManagementService.Server.Config;
-using RevitFamilyBox.FamilyManagementService.Server.DAL.Models;
 using RevitFamilyBox.FamilyManagementService.Server.Domain;
 namespace RevitFamilyBox.FamilyManagementService.Server.Repository
 {
@@ -93,5 +92,9 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Repository
             }
         }
 
+        public Task<FamilyInfo> FindFamilyInfoAsync(string id, int versionId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

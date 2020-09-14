@@ -2,12 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RevitFamilyBox.FamilyManagementService.Server.DAL.Models;
 using RevitFamilyBox.FamilyManagementService.Server.Domain;
 
 namespace RevitFamilyBox.FamilyManagementService.Server.Controllers
 {
-  [ApiController]
+    [ApiController]
   [Route("[controller]")]
   public class FamilyManagerController : ControllerBase
   {
