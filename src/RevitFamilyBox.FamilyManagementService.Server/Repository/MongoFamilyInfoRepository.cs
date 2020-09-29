@@ -12,17 +12,19 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Repository
     public class MongoFamilyInfoRepository: IFamilyInfoRepository
     {
         private readonly FamilyManagerConfig _familyMgrCfg;
+        private readonly Lazy<MongoClient> _mongoClient;
 
 
         public MongoFamilyInfoRepository(FamilyManagerConfig familyMgrCfg)
         {
             _familyMgrCfg = familyMgrCfg;
+            _mongoClient = new Lazy<MongoClient>(() => new MongoClient(familyMgrCfg.DBCollection));
         }
 
 
         public async Task<IEnumerable<FamilyInfo>> AddFamilyInfosAsync(IEnumerable<FamilyInfo> familyInfos)
         {
-            var client = new MongoClient(_familyMgrCfg.DBConnection);
+            var client = _mongoClient.Value;
             IMongoDatabase db = client.GetDatabase(_familyMgrCfg.DBName);
 
             IMongoCollection<FamilyInfoEntity> collection = db.GetCollection<FamilyInfoEntity>(_familyMgrCfg.DBCollection);
@@ -37,21 +39,24 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Repository
             return familyInfos;
         }
 
-        public async Task<IEnumerable<FamilyInfo>> FindFamilyInfosAsync(int userId, int versionId, string xPath = null)
+        public async Task<IEnumerable<FamilyInfo>> FindFamilyInfosAsync(int userId, string idPath = null)
         {
-            var client = new MongoClient(_familyMgrCfg.DBConnection);
+            var client = _mongoClient.Value;
             IMongoDatabase db = client.GetDatabase(_familyMgrCfg.DBName);
+            IMongoCollection<FamilyInfoEntity> collection = db.GetCollection<FamilyInfoEntity>(_familyMgrCfg.DBCollection);
 
-            FilterDefinitionBuilder<FamilyInfoEntity> builderFilter = Builders<FamilyInfoEntity>.Filter;
-            FilterDefinition<FamilyInfoEntity> filter =
-              builderFilter.And(builderFilter.Eq("UserId", userId),
-                builderFilter.Eq("VersionId", versionId));
+            var builderFilter = Builders<FamilyInfoEntity>.Filter;
+            var userIdFilter = builderFilter.Eq("UserId", userId);
+            FilterDefinition<FamilyInfoEntity> pathFilter = builderFilter.Empty;
+            if (!string.IsNullOrWhiteSpace(idPath))
+            {
+                var splitedPath = idPath.Split('/');
+                pathFilter = builderFilter.AnyIn("Parents", splitedPath);
+            }
 
-            IMongoCollection<FamilyInfoEntity> collection =
-              db.GetCollection<FamilyInfoEntity>(_familyMgrCfg.DBCollection);
+            var filter = builderFilter.And(userIdFilter, pathFilter);
             var queryResult = await collection.FindAsync(filter);
             var arrFamilyInfo = await queryResult.ToListAsync();
-
             var res = new List<FamilyInfo>();
             foreach (var item in arrFamilyInfo)
             {
@@ -73,7 +78,7 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Repository
 
         private FamilyInfoEntity ToEntity(FamilyInfo familyInfo)
         {
-            return new FamilyInfoEntity() { Id = new MongoDB.Bson.ObjectId(familyInfo.Id), Name = familyInfo.Name, FileBlobId = familyInfo.FileBlobId, Parameters = ToJsonString(familyInfo.Parameters), UserId = familyInfo.UserId, VersionId = familyInfo.VersionId };
+            return new FamilyInfoEntity() { Id = familyInfo.Id, EntityId = new MongoDB.Bson.ObjectId($"{familyInfo.Id}:{familyInfo.VersionId}"),  Name = familyInfo.Name, FileBlobId = familyInfo.FileBlobId, Parameters = ToJsonString(familyInfo.Parameters), UserId = familyInfo.UserId, VersionId = familyInfo.VersionId };
         }
 
         private FamilyInfo ToInfo(FamilyInfoEntity familyInfoEntity)
@@ -92,9 +97,18 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Repository
             }
         }
 
-        public Task<FamilyInfo> FindFamilyInfoAsync(string id, int versionId)
+        public async Task<FamilyInfo> FindFamilyInfoAsync(string id, int versionId)
         {
-            throw new NotImplementedException();
+            var client = _mongoClient.Value;
+            IMongoDatabase db = client.GetDatabase(_familyMgrCfg.DBName);
+            IMongoCollection<FamilyInfoEntity> collection = db.GetCollection<FamilyInfoEntity>(_familyMgrCfg.DBCollection);
+            var res = await (await collection.FindAsync(k => k.EntityId == new MongoDB.Bson.ObjectId($"{id}:{versionId}"))).FirstOrDefaultAsync();
+            if (res == null)
+            {
+                return null;
+            }
+
+            return ToInfo(res);
         }
     }
 }

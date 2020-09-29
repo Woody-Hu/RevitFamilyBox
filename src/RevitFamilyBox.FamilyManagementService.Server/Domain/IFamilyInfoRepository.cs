@@ -10,7 +10,7 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Domain
 
         Task<IEnumerable<FamilyInfo>> AddFamilyInfosAsync(IEnumerable<FamilyInfo> familyInfos);
 
-        Task<IEnumerable<FamilyInfo>> FindFamilyInfosAsync(int userId, int versionId, string xPath = null);
+        Task<IEnumerable<FamilyInfo>> FindFamilyInfosAsync(int userId, string idPath = null);
 
         Task<bool> RemoveFamilyInfosAsync(IEnumerable<int> familyIds, int versionId);
 

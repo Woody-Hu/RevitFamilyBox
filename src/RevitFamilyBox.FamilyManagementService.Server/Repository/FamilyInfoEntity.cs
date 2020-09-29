@@ -4,7 +4,9 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Repository
 {
   public class FamilyInfoEntity
   {
-    public ObjectId Id { get; set; }
+    public ObjectId EntityId { get; set; }
+
+    public string Id { get; set; }
 
     public string Name { get; set; }
 

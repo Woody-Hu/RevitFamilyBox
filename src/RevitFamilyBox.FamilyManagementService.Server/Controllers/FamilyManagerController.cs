@@ -27,7 +27,7 @@ namespace RevitFamilyBox.FamilyManagementService.Server.Controllers
     [HttpGet("Item")]
     public async Task<IEnumerable<FamilyInfo>> GetFamilyInfosAsync()
     {
-      return await _familyManagerService.FindFamilyInfosAsync(1, 1);
+      return await _familyManagerService.FindFamilyInfosAsync(1, string.Empty);
     }
 
     [HttpPost("Item")]
